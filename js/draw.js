@@ -1,6 +1,8 @@
+
 var dataset;
 var dataSelection;
 
+// constants defined here
 var HITS_PER_AB = 0;
 var HOME_RUNS_PER_GAME = 1;
 var RUNS_PER_GAME = 2;
@@ -19,6 +21,7 @@ var margin = {
 width = 1000 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
 
+// button click activities
 function wireButtonClickEvents() 
 {
     d3.selectAll("#buttonClass .button").on("click", function () {
@@ -112,7 +115,6 @@ $(document).ready(function ()
     loadData(); 
 });
 
-// Loads the CSV file 
 function loadData() 
 {
     d3.csv('data/Teams.csv', function(data) 
@@ -279,9 +281,9 @@ function drawLineGraph(
          .attr("dy", "1em")
          .style("text-anchor", "middle")
          .text(yLabel);  
-    
 }
 
+// the last visualization
 function drawLineGraphInteractive(
     dataset, 
     xAttr, 
@@ -361,8 +363,7 @@ function drawLineGraphInteractive(
          .attr("x",0 - (height / 2))
          .attr("dy", "1em")
          .style("text-anchor", "middle")
-         .text(yLabel);  
-    
+         .text(yLabel);   
 }
 
 
