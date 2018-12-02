@@ -210,7 +210,8 @@ function drawLineGraph(
     color,
     chartTitle,
     xLabel,
-    yLabel) 
+    yLabel
+    ) 
 {  
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
@@ -229,23 +230,23 @@ function drawLineGraph(
                    .nice();
 
     var chart = d3.select(chartID).append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
     
     var xAxis = chart.append("g")
-                    .attr("transform", "translate(0, " + height + ")")
-                    .call(d3.axisBottom(xScale));
+                     .attr("transform", "translate(0, " + height + ")")
+                     .call(d3.axisBottom(xScale));
 
     var yAxis = chart.append("g")
-                    .call(d3.axisLeft(yScale));
+                     .call(d3.axisLeft(yScale));
     
     // add line
     var lineGen = d3.line(dataset)
-                 .x(function(d) { return xScale(d[xAttr]); })
-                 .y(function(d) { return yScale(d[yAttr]); });
+                    .x(function(d) { return xScale(d[xAttr]); })
+                    .y(function(d) { return yScale(d[yAttr]); });
     
     chart.append('svg:path')
          .attr('d', lineGen(dataset))
@@ -255,12 +256,12 @@ function drawLineGraph(
 
     // Chart title
     chart.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.top / 5))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "25px")
-        .style("font-weight", "bold") 
-        .text(chartTitle);
+         .attr("x", (width / 2))             
+         .attr("y", 0 - (margin.top / 5))
+         .attr("text-anchor", "middle")  
+         .style("font-size", "25px")
+         .style("font-weight", "bold") 
+         .text(chartTitle);
 
     // x axis label
     chart.append("text")
@@ -289,7 +290,8 @@ function drawLineGraphInteractive(
     color,
     chartTitle,
     xLabel,
-    yLabel) 
+    yLabel
+    ) 
 {  
     height = 500; 
 
@@ -311,23 +313,23 @@ function drawLineGraphInteractive(
                    .nice();
 
     var chart = d3.select(chartID).append("svg")
-                .attr("width", width + margin.left + margin.right)
-                .attr("height", height + margin.top + margin.bottom)
-                .append("g")
-                .attr("transform",
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
     
     var xAxis = chart.append("g")
-                    .attr("transform", "translate(0, " + height + ")")
-                    .call(d3.axisBottom(xScale));
+                     .attr("transform", "translate(0, " + height + ")")
+                     .call(d3.axisBottom(xScale));
 
     var yAxis = chart.append("g")
-                    .call(d3.axisLeft(yScale));
+                     .call(d3.axisLeft(yScale));
     
     // add line
     var lineGen = d3.line(dataset)
-                 .x(function(d) { return xScale(d[xAttr]); })
-                 .y(function(d) { return yScale(d[yAttr]); });
+                    .x(function(d) { return xScale(d[xAttr]); })
+                    .y(function(d) { return yScale(d[yAttr]); });
     
     chart.append('svg:path')
          .attr('d', lineGen(dataset))
@@ -337,12 +339,12 @@ function drawLineGraphInteractive(
 
     // Chart title
     chart.append("text")
-        .attr("x", (width / 2))             
-        .attr("y", 0 - (margin.top / 5))
-        .attr("text-anchor", "middle")  
-        .style("font-size", "25px")
-        .style("font-weight", "bold") 
-        .text(chartTitle);
+         .attr("x", (width / 2))             
+         .attr("y", 0 - (margin.top / 5))
+         .attr("text-anchor", "middle")  
+         .style("font-size", "25px")
+         .style("font-weight", "bold") 
+         .text(chartTitle);
 
     // x axis label
     chart.append("text")
