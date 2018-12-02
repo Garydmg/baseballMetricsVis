@@ -1,5 +1,8 @@
 
 var dataset;
+
+// select specific column of data
+// value corresponds to value stored in button (see html)
 var dataSelection;
 
 // constants defined here
