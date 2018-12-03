@@ -9,6 +9,7 @@ h1 {
     font-weight: bold;
     padding-top: 50px;
     margin-top: 0px !important;
+    padding-left: 25px;
 }
 
 h3 {
@@ -83,13 +84,21 @@ h6 {
 }
 
 p {
-    font-size: 25px;
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-size: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     margin-left: 35px;
     margin-right: 30px;
     color: white;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+li {
+  font-size: 18px;
+  margin-left: 60px;
+  margin-right: 30px;
+  color: white;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
 #column1 {
