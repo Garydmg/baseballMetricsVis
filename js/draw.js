@@ -1,5 +1,14 @@
 
 var dataset;
+var length_data
+var reference = {'H_AB':['H', 'AB'],
+                 'HR_G':['HR', 'G'],
+                 'R_G':['R','G'],
+                 'BB_G':['BB', 'G'],
+                 'SO_G':['SO','G']
+                }
+
+var time = [1871, 2017] 
 
 // select specific column of data
 // value corresponds to value stored in button (see html)
@@ -35,6 +44,7 @@ function wireButtonClickEvents()
             d3.select("#buttonClass .current").classed("current", false);
             d3.select(this).classed("current", true);
             $("#interactive").empty();
+            $("#variance").empty();
             drawLineGraphInteractive(
                 dataset, 
                 "Year", 
@@ -44,13 +54,25 @@ function wireButtonClickEvents()
                 "Yearly Average of Hits/AB (1871-2017)",
                 "Year",
                 "Yearly Average of Hits/AB"
-                )
+                );
+            drawBarGraphInteractive(
+                dataset, 
+                "Year", 
+                "H_AB", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average of Hits/AB (1871-2017)",
+                "Year",
+                "Yearly Average of Hits/AB",
+                time
+                );
         }
         else if (dataSelection == HOME_RUNS_PER_GAME)
         {
             d3.select("#buttonClass .current").classed("current", false);
             d3.select(this).classed("current", true);
             $("#interactive").empty();
+            $("#variance").empty();
             drawLineGraphInteractive(
                 dataset, 
                 "Year", 
@@ -60,6 +82,17 @@ function wireButtonClickEvents()
                 "Yearly Average of Homeruns/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Homeruns/Game"
+                );
+            drawBarGraphInteractive(
+                dataset, 
+                "Year", 
+                "HR_G", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average of Homeruns/Game (1871-2017)",
+                "Year",
+                "Yearly Average of Homeruns/Game",
+                time
                 )
         }
         else if (dataSelection == RUNS_PER_GAME)
@@ -67,6 +100,7 @@ function wireButtonClickEvents()
             d3.select("#buttonClass .current").classed("current", false);
             d3.select(this).classed("current", true);
             $("#interactive").empty();
+            $("#variance").empty();
             drawLineGraphInteractive(
                 dataset, 
                 "Year", 
@@ -76,6 +110,17 @@ function wireButtonClickEvents()
                 "Yearly Average of Runs/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Runs/Game"
+                );
+            drawBarGraphInteractive(
+                dataset, 
+                "Year", 
+                "R_G", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average of Runs/Game (1871-2017)",
+                "Year",
+                "Yearly Average of Runs/Game",
+                time
                 )
         }
         else if (dataSelection == WALKS_PER_GAME)
@@ -83,6 +128,7 @@ function wireButtonClickEvents()
             d3.select("#buttonClass .current").classed("current", false);
             d3.select(this).classed("current", true);
             $("#interactive").empty();
+            $("#variance").empty();
             drawLineGraphInteractive(
                 dataset, 
                 "Year", 
@@ -92,6 +138,17 @@ function wireButtonClickEvents()
                 "Yearly Average of Walks/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Walks/Game"
+                );
+            drawBarGraphInteractive(
+                dataset, 
+                "Year", 
+                "BB_G", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average of Walks/Game (1871-2017)",
+                "Year",
+                "Yearly Average of Walks/Game",
+                time
                 )
         }
         else if (dataSelection == STRIKE_OUTS_PER_GAME)
@@ -99,6 +156,7 @@ function wireButtonClickEvents()
             d3.select("#buttonClass .current").classed("current", false);
             d3.select(this).classed("current", true);
             $("#interactive").empty();
+            $("#variance").empty();
             drawLineGraphInteractive(
                 dataset, 
                 "Year", 
@@ -108,6 +166,45 @@ function wireButtonClickEvents()
                 "Yearly Average of Strike-outs/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Strike/Game"
+            );
+            drawBarGraphInteractive(
+                dataset, 
+                "Year", 
+                "SO_G", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average of Strike-outs/Game (1871-2017)",
+                "Year",
+                "Yearly Average of Strike/Game",
+                time
+            )
+        }
+        else if (dataSelection == OBP)
+        {
+            d3.select("#buttonClass .current").classed("current", false);
+            d3.select(this).classed("current", true);
+            $("#interactive").empty();
+            $("#variance").empty();
+            drawLineGraphInteractive(
+                dataset, 
+                "Year", 
+                "OBP", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average On-Bat Percentage (1871-2017)",
+                "Year",
+                "Yearly Average OBP"
+            );
+            drawBarGraphInteractive(
+                dataset, 
+                "Year", 
+                "OBP", 
+                "#interactive", 
+                "#005a7d",
+                "Yearly Average On-Bat Percentage (1871-2017)",
+                "Year",
+                "Yearly Average OBP",
+                time
             )
         }
     });
@@ -120,18 +217,32 @@ $(document).ready(function ()
 
 function loadData() 
 {
-    d3.csv('data/Teams.csv', function(data) 
+    d3.csv('data/Teams_wraw.csv', function(data) 
     {
         dataset =  data
         data.forEach(function(d) {
             d.Year = parseInt(d.Year)
+
+            d.H = parseFloat(d.H)
+            d.HR = parseFloat(d.HR)
+            d.AB = parseFloat(d.AB)
+            d.R = parseFloat(d.R)
+            d.G = parseFloat(d.G)
+            d.BB = parseFloat(d.BB)
+            d.SO = parseFloat(d.SO)
+            d.HBP = parseFloat(d.HBP)
+            d.SF = parseFloat(d.SF)
+
             d.BB_G = parseFloat(d.BB_G)
             d.H_AB = parseFloat(d.H_AB)
-            d.MOVING_AVG_CRITERIA = parseFloat(d.MOVING_AVG_CRITERIA)
+            d.HR_G = parseFloat(d.HR_G)
             d.R_G = parseFloat(d.R_G)
             d.SO_G = parseFloat(d.SO_G)
+            d.OBP = parseFloat(d.OBP)
         })
         
+        length_data = dataset.length
+
         drawLineGraph(
             data, 
             "Year", 
@@ -202,6 +313,17 @@ function loadData()
             "Yearly Average of Hits/AB (1871-2017)",
             "Year",
             "Yearly Average of Hits/AB"
+            )
+        drawBarGraphInteractive(
+            data, 
+            "Year", 
+            "H_AB", 
+            "#variance", 
+            "#005a7d",
+            "Yearly Average of Hits/AB (1871-2017)",
+            "Year",
+            "Yearly Average of Hits/AB",
+            time
             )
         wireButtonClickEvents();
     })
@@ -309,13 +431,11 @@ function drawLineGraphInteractive(
     
     var xScale = d3.scaleLinear()
                    .domain([minX, maxX]) 
-                   .range([0, width])
-                   .nice();
+                   .range([0, width]);
     
     var yScale = d3.scaleLinear()
                    .domain([minY, maxY])
-                   .range([height, 0])
-                   .nice();
+                   .range([height, 0]);
 
     var chart = d3.select(chartID).append("svg")
                   .attr("width", width + margin.left + margin.right)
@@ -341,6 +461,154 @@ function drawLineGraphInteractive(
          .attr('stroke', color)
          .attr('stroke-width', 3)
          .attr('fill', 'none');
+
+    // Chart title
+    chart.append("text")
+         .attr("x", (width / 2))             
+         .attr("y", 0 - (margin.top / 5))
+         .attr("text-anchor", "middle")  
+         .style("font-size", "25px")
+         .style("font-weight", "bold") 
+         .text(chartTitle);
+
+    // x axis label
+    chart.append("text")
+         .attr("transform",
+            "translate(" + (width/2) + " ," + 
+                           (height + 40) + ")")
+         .style("text-anchor", "middle")
+         .text(xLabel);
+
+    // y axis label
+    chart.append("text")
+         .attr("transform", "rotate(-90)")
+         .attr("y", -50)
+         .attr("x",0 - (height / 2))
+         .attr("dy", "1em")
+         .style("text-anchor", "middle")
+         .text(yLabel);   
+}
+
+// Time is an array/list
+function average_calc(A, B, time){
+  var factor_a = 0;
+  var factor_b = 0;
+
+  for (var i = 0; i < length_data; i++) {
+    if (dataset[i]['Year'] >= time[0] && dataset[i]['Year'] <= time[1]){
+      factor_a += dataset[i][A]
+      factor_b += dataset[i][B]
+
+    }
+  }
+  return factor_a/factor_b
+}
+
+function OBP_calc(time){
+  var total_H = 0
+  var total_AB = 0
+  var total_HBP = 0;
+  var total_SF = 0
+
+  for (var i = 0; i < length_data; i++) {
+    if (dataset[i]['Year'] >= time[0] && dataset[i]['Year'] <= time[1]){
+      total_H += dataset[i]['H']
+      total_AB += dataset[i]['AB']
+      total_HBP += dataset[i]['HBP']
+      total_SF += dataset[i]['SF']
+    }
+  }
+  return (total_H + total_HBP + total_SF)/(total_AB + total_H + total_HBP + total_SF)
+}
+
+function drawBarGraphInteractive(
+    dataset, 
+    xAttr, 
+    yAttr, 
+    chartID, 
+    color,
+    chartTitle,
+    xLabel,
+    yLabel,
+    time
+    ) 
+{  
+    if (yAttr == 'OBP'){average = OBP_calc(time)}
+      else {average = average_calc(reference[yAttr][0], reference[yAttr][1], time)}
+
+    height = 500; 
+
+    minX = d3.min(dataset, function(d) {return d[xAttr]})
+    maxX = d3.max(dataset, function(d) {return d[xAttr]})
+
+    minY = d3.min(dataset, function(d) {return d[yAttr]})
+    maxY = d3.max(dataset, function(d) {return d[yAttr]})
+    
+    
+    var xScale = d3.scaleBand()
+                   .domain(_.range(minX, maxX+1)) 
+                   .range([0, width]);
+    
+    var yScale = d3.scaleLinear()
+                   .domain([minY, maxY])
+                   .range([height, 0]);
+
+    var chart = d3.select(chartID).append("svg")
+                  .attr("width", width + margin.left + margin.right)
+                  .attr("height", height + margin.top + margin.bottom)
+                  .append("g")
+                  .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+    
+    var xAxis = chart.append("g")
+                     .attr('id', 'AXIS')
+                     .attr("transform", "translate(0, " + yScale(average) + ")")
+                     .call(d3.axisBottom(xScale))
+                     .selectAll("text")
+                      .attr("transform", "rotate(-90)")
+                      .attr("dy", "0.3em")
+                      .attr("y", 0)
+                      .attr("dx", "-2em") 
+                      .attr("font-size", "0.8em");
+
+    var yAxis = chart.append("g")
+                     .call(d3.axisLeft(yScale));
+
+
+    //Draw bars
+    // chart.selectAll(".bar")
+    //         .data(dataset)
+    //         .enter()
+    //         .append("rect")
+    //         .attr("class", "bar") 
+    //         .attr("id", function (d) { return "bar" + d.Year; })//NEW
+    //         .attr("x", function (d) { return xScale(d[xAttr]); })
+    //         .attr("width", xScale.bandwidth()-2)
+    //         .attr("y", function (d) { return yScale(d[yAttr]); })
+    //         .attr("height", function (d) { return height - yScale(d[yAttr]); })
+    
+    //Draw bars
+    chart.selectAll(".bar")
+            .data(dataset)
+            .enter()
+            .append("rect")
+            .attr("class", "bar") 
+            .attr("id", function (d) { return "bar" + d.Year; })//NEW
+            .attr("x", function (d) { return xScale(d[xAttr]); })
+            .attr("width", xScale.bandwidth()-2)
+            .attr("y", function (d) {
+              if (d[yAttr] - average <= 0){return yScale(average);}
+              else {return yScale(d[yAttr])}
+              })
+            .attr("height", function (d) {
+              if (d[yAttr] - average <= 0){return yScale(d[yAttr]) - yScale(average);}
+              else {return Math.abs(yScale(d[yAttr]) - yScale(average))}
+              })
+            .attr("fill", function (d) {
+              if (d[yAttr] - average <= 0){return 'blue';}
+              else {return 'red'}
+              })
+    
 
     // Chart title
     chart.append("text")
