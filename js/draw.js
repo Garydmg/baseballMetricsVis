@@ -12,7 +12,7 @@ var time = [1871, 2017]
 
 // select specific column of data
 // value corresponds to value stored in button (see html)
-var dataSelection;
+var dataSelection = 0;
 
 // constants defined here
 var HITS_PER_AB = 0;
@@ -212,7 +212,8 @@ function wireButtonClickEvents()
 
 $(document).ready(function () 
 {
-    loadData(); 
+    loadData();
+    listener();
 });
 
 function loadData() 
@@ -420,7 +421,7 @@ function drawLineGraphInteractive(
     yLabel
     ) 
 {  
-    height = 500; 
+    height = 300; 
 
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
@@ -536,7 +537,7 @@ function drawBarGraphInteractive(
     if (yAttr == 'OBP'){average = OBP_calc(time)}
       else {average = average_calc(reference[yAttr][0], reference[yAttr][1], time)}
 
-    height = 500; 
+    height = 300; 
 
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
@@ -637,4 +638,79 @@ function drawBarGraphInteractive(
          .text(yLabel);   
 }
 
+function variance_mod(time){
+    var constant_to_y = {0: 'H_AB',
+                         1: 'HR_G',
+                         2: 'R_G',
+                         3: 'BB_G',
+                         4: 'SO_G',
+                         5: 'OBP'
+                        };
+    
+    attribute = constant_to_y[dataSelection]
 
+    if (attribute == 'OBP'){average = OBP_calc(time)}
+      else {average = average_calc(reference[attribute][0], reference[attribute][1], time)}
+    
+    console.log(average)
+
+    minY = d3.min(dataset, function(d) {return d[attribute]})
+    maxY = d3.max(dataset, function(d) {return d[attribute]})
+
+    var yScale = d3.scaleLinear()
+               .domain([minY, maxY])
+               .range([height, 0]);
+
+    d3.select('#AXIS')
+      .transition()
+      .attr('transform', 'translate(0,'+ yScale(average) + ')')
+
+    d3.selectAll('.bar')
+      .transition()
+      .attr("y", function (d) {
+        if (d[attribute] - average <= 0){return yScale(average);}
+        else {return yScale(d[attribute])}
+        })
+      .attr("height", function (d) {
+        if (d[attribute] - average <= 0){return yScale(d[attribute]) - yScale(average);}
+        else {return Math.abs(yScale(d[attribute]) - yScale(average))}
+        })
+      .attr("fill", function (d) {
+        if (d[attribute] - average <= 0){return 'blue';}
+        else {return 'red'}
+        })
+}
+
+function listener(){
+  console.log('Listener loaded')
+  var numInputs = document.querySelectorAll('input[type=number]')
+  var _changeInterval = null
+
+    numInputs.forEach(function (input) {
+      input.addEventListener('change', function (d) {
+        if (d.target.value == '') {
+          d.target.value = 1871
+        }
+      })
+    })
+
+    $('#yearA')
+        .keyup(function() {
+          clearInterval(_changeInterval)
+          _changeInterval = setInterval(function() {
+            clearInterval(_changeInterval);
+            time[0] = parseInt($('#yearA').val());
+            variance_mod(time);
+            }, 400);
+        })
+
+    $('#yearB')
+        .keyup(function() {
+          clearInterval(_changeInterval)
+          _changeInterval = setInterval(function() {
+            clearInterval(_changeInterval);
+            time[1] = parseInt($('#yearB').val());
+            variance_mod(time);
+            }, 400);
+        })
+}
