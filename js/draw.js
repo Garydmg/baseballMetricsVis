@@ -61,7 +61,7 @@ function wireButtonClickEvents()
                 "H_AB", 
                 "#interactive", 
                 "#005a7d",
-                "Yearly Average of Hits/AB (1871-2017)",
+                "Variance comparison for Hits/AB",
                 "Year",
                 "Yearly Average of Hits/AB",
                 time
@@ -89,7 +89,7 @@ function wireButtonClickEvents()
                 "HR_G", 
                 "#interactive", 
                 "#005a7d",
-                "Yearly Average of Homeruns/Game (1871-2017)",
+                "Variance comparison for Homeruns/Game",
                 "Year",
                 "Yearly Average of Homeruns/Game",
                 time
@@ -117,7 +117,7 @@ function wireButtonClickEvents()
                 "R_G", 
                 "#interactive", 
                 "#005a7d",
-                "Yearly Average of Runs/Game (1871-2017)",
+                "Variance comparison for Runs/Game",
                 "Year",
                 "Yearly Average of Runs/Game",
                 time
@@ -145,7 +145,7 @@ function wireButtonClickEvents()
                 "BB_G", 
                 "#interactive", 
                 "#005a7d",
-                "Yearly Average of Walks/Game (1871-2017)",
+                "Variance comparison for Walks/Game",
                 "Year",
                 "Yearly Average of Walks/Game",
                 time
@@ -173,7 +173,7 @@ function wireButtonClickEvents()
                 "SO_G", 
                 "#interactive", 
                 "#005a7d",
-                "Yearly Average of Strike-outs/Game (1871-2017)",
+                "Variance comparison for Strike-outs/Game",
                 "Year",
                 "Yearly Average of Strike/Game",
                 time
@@ -201,7 +201,7 @@ function wireButtonClickEvents()
                 "OBP", 
                 "#interactive", 
                 "#005a7d",
-                "Yearly Average On-Bat Percentage (1871-2017)",
+                "Variance comparison for On-Bat Percentage",
                 "Year",
                 "Yearly Average OBP",
                 time
@@ -565,12 +565,13 @@ function drawBarGraphInteractive(
                      .attr('id', 'AXIS')
                      .attr("transform", "translate(0, " + yScale(average) + ")")
                      .call(d3.axisBottom(xScale))
-                     .selectAll("text")
-                      .attr("transform", "rotate(-90)")
-                      .attr("dy", "0.3em")
-                      .attr("y", 0)
-                      .attr("dx", "-2em") 
-                      .attr("font-size", "0.8em");
+                     // .selectAll("text")
+                     //  .attr("transform", "rotate(-90)")
+                     //  .attr("dy", "0.3em")
+                     //  .attr("y", 0)
+                     //  .attr("dx", "-2em") 
+                     //  .attr("font-size", "0.8em");
+    d3.selectAll('#AXIS .tick').remove()
 
     var yAxis = chart.append("g")
                      .call(d3.axisLeft(yScale));
