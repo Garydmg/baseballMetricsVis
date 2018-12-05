@@ -197,7 +197,7 @@ function wireButtonClickEvents()
                 "OBP",
                 "#interactive",
                 "#005a7d",
-                "Yearly Average On-Bat Percentage (1871-2017)",
+                "Yearly Average On-Base Percentage (1871-2017)",
                 "Year",
                 "Yearly Average OBP"
             );
@@ -207,7 +207,7 @@ function wireButtonClickEvents()
                 "OBP",
                 "#interactive",
                 "#005a7d",
-                "Variance comparison for On-Bat Percentage",
+                "Variance comparison for On-Base Percentage",
                 "Year",
                 "Yearly Average OBP",
                 time
