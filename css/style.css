@@ -76,6 +76,13 @@ h6 {
     color: white;
 }
 
+
+.button.selected {
+    background: #908aaa;
+    border: 2px solid #908aaa;
+    color: white;
+}
+
 #title {
     background-color: #e2e2e2;
     height: 220px;
