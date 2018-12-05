@@ -13,6 +13,7 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script type="text/javascript" src="js/underscore.js"></script>
     <script type="text/javascript" src="js/draw.js"></script>
 
     <div id="title">
@@ -122,9 +123,21 @@
             <div class="button" id="SO_G" data-val="4">Strike-outs per Game</div>
             <div class="button" id="OBP" data-val="5">On-base Percentage</div>
         </div>
+        <div id="year_selector">
+            <input type='number' min=1887 max=2017 step=1 value=1871 id="yearA" required>
+            <input type='number' min=1887 max=2017 step=1 value=2017 id="yearB" required>
+        </div>
+        <br>
+        <div id="event_selector">
+            <div class="button" id='Change1' data-val="0">Dead ball to Live ball (1920 onwards)</div>
+            <div class="button" id="Change2" data-val="1">Rubber Shortage (1941-1945)</div>
+            <div class="button" id="Strike" data-val="2">Change in Strike Zone (1963-1968)</div>
+            <div class="button" id="Roids" data-val="3">Steroids (1985-2002)</div>
+        </div>
         <p></p>
         <div class="chartPanel">
             <div class="chart" id="interactive"></div>
+            <div class ="chart" id="variance"></div>
         </div>
         <!-- <div id="column1" style="background-color: #001f3f">
             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
