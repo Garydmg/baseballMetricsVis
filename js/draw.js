@@ -875,7 +875,7 @@ function listener(){
             clearInterval(_changeInterval);
             time[0] = parseInt($('#yearA').val());
             variance_mod(time);
-            }, 400);
+            }, 1500);
         })
 
     $('#yearB')
@@ -885,6 +885,6 @@ function listener(){
             clearInterval(_changeInterval);
             time[1] = parseInt($('#yearB').val());
             variance_mod(time);
-            }, 400);
+            }, 1500);
         })
 }
