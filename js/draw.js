@@ -1,6 +1,7 @@
 
 var dataset;
 var length_data
+var eventSelector
 var reference = {'H_AB':['H', 'AB'],
                  'HR_G':['HR', 'G'],
                  'R_G':['R','G'],
@@ -21,6 +22,12 @@ var RUNS_PER_GAME = 2;
 var WALKS_PER_GAME = 3;
 var STRIKE_OUTS_PER_GAME = 4;
 var OBP = 5;
+
+//Events to look out for
+var Change1 = 0
+var Change2 = 1
+var Strike = 2
+var Roids = 3
 
 // chart properties
 var margin = {
@@ -210,6 +217,96 @@ function wireButtonClickEvents()
     });
 }
 
+function eventButtons() 
+{
+    d3.selectAll("#event_selector .button").on("click", function () {
+        eventSelector = d3.select(this).attr("data-val");
+        console.log(eventSelector);
+        if (eventSelector == Change1)
+        {
+          if (!d3.select(this).classed("selected")) {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+
+            d3.select("#event_selector .selected").classed("selected", false);
+            d3.select(this).classed("selected", true);
+            time = [1920, 1930]
+
+            variance_mod(time)
+          }
+
+          else {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+            d3.select(this).classed("selected", false);
+          }
+        }
+
+        else if (eventSelector == Change2)
+        {
+          if (!d3.select(this).classed("selected")) {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+
+            d3.select("#event_selector .selected").classed("selected", false);
+            d3.select(this).classed("selected", true);
+            time = [1941, 1945]
+
+            variance_mod(time)
+          }
+
+          else {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+            d3.select(this).classed("selected", false);
+          }
+        }
+
+        else if (eventSelector == Strike)
+        {
+         if (!d3.select(this).classed("selected")) {
+           d3.selectAll('.bar')
+            .attr('opacity', 0.4)
+
+            d3.select("#event_selector .selected").classed("selected", false);
+            d3.select(this).classed("selected", true);
+            time = [1963,1968]
+
+            variance_mod(time)    
+          }
+
+          else {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+            d3.select(this).classed("selected", false);
+          }    
+        }
+
+        else if (eventSelector == Roids)
+        {
+           if (!d3.select(this).classed("selected")) {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+
+            d3.select("#event_selector .selected").classed("selected", false);
+            d3.select(this).classed("selected", true);
+            time = [1985, 2002]
+
+            variance_mod(time)
+          }
+         
+         else {
+            d3.selectAll('.bar')
+              .attr('opacity', 0.4)
+            d3.select(this).classed("selected", false);
+          }    
+
+        }
+    });
+
+
+}
+
 $(document).ready(function () 
 {
     loadData();
@@ -327,6 +424,7 @@ function loadData()
             time
             )
         wireButtonClickEvents();
+        eventButtons();
     })
 }
 
@@ -349,13 +447,11 @@ function drawLineGraph(
     
     var xScale = d3.scaleLinear()
                    .domain([minX, maxX]) 
-                   .range([0, width])
-                   .nice();
+                   .range([0, width]);
     
     var yScale = d3.scaleLinear()
                    .domain([minY, maxY])
-                   .range([height, 0])
-                   .nice();
+                   .range([height, 0]);
 
     var chart = d3.select(chartID).append("svg")
                   .attr("width", width + margin.left + margin.right)
@@ -366,7 +462,7 @@ function drawLineGraph(
     
     var xAxis = chart.append("g")
                      .attr("transform", "translate(0, " + height + ")")
-                     .call(d3.axisBottom(xScale));
+                     .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(12));
 
     var yAxis = chart.append("g")
                      .call(d3.axisLeft(yScale));
@@ -447,7 +543,7 @@ function drawLineGraphInteractive(
     
     var xAxis = chart.append("g")
                      .attr("transform", "translate(0, " + height + ")")
-                     .call(d3.axisBottom(xScale));
+                     .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(12));
 
     var yAxis = chart.append("g")
                      .call(d3.axisLeft(yScale));
@@ -598,6 +694,7 @@ function drawBarGraphInteractive(
             .attr("id", function (d) { return "bar" + d.Year; })//NEW
             .attr("x", function (d) { return xScale(d[xAttr]); })
             .attr("width", xScale.bandwidth()-2)
+            .attr('opacity', 0.4)
             .attr("y", function (d) {
               if (d[yAttr] - average <= 0){return yScale(average);}
               else {return yScale(d[yAttr])}
@@ -680,6 +777,14 @@ function variance_mod(time){
         if (d[attribute] - average <= 0){return 'blue';}
         else {return 'red'}
         })
+
+    d3.selectAll('.bar')
+      .attr('opacity', 0.4)
+    
+    _.range(time[0], time[1]+1).forEach(function (d){
+      d3.select('#bar'+d)
+        .attr('opacity', 1)
+      })
 }
 
 function listener(){
