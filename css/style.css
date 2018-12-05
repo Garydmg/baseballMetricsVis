@@ -83,6 +83,21 @@ h6 {
     text-align: center;
 }
 
+@media only screen and (max-width: 1500px) {
+  .summary{
+    display: none;
+  }
+}
+.summary{
+  width: 15%;
+  color: black;
+  font-size: 13px;
+  float: right;
+  padding-top: 50px;
+  flex;
+
+}
+
 p {
     font-size: 18px;
     padding-top: 5px;
