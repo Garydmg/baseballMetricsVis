@@ -1,4 +1,3 @@
-
 var dataset;
 var length_data
 var eventSelector
@@ -439,6 +438,13 @@ function drawLineGraph(
     yLabel
     ) 
 {  
+  
+    var div = d3.select("body").append("div")
+                .attr("class", "toolTip")
+                .style("position", "absolute")
+            
+    var convert = d3.format(".2f")
+    
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
 
@@ -478,6 +484,27 @@ function drawLineGraph(
          .attr('stroke-width', 3)
          .attr('fill', 'none');
 
+    chart.selectAll(".dataPoint")
+       .data(dataset)
+       .enter().append("circle")
+       .attr("class", "dataPoint")
+       .attr("fill", "#fff")
+       .attr("cx", function(d, i) { return xScale(d[xAttr]) })
+       .attr("cy", function(d) { return yScale(d[yAttr]) })
+       .attr("r", 20)
+       .attr("opacity", "0")
+       .on("mouseover", function(d) {
+           d3.select(this).attr("opacity", "0");
+           div.style("left", (d3.event.pageX) - 30 +  "px")
+                  .style("top", (d3.event.pageY) + 20 +"px")
+                  .style("display", "inline-block")
+                  .html("<b>Year: "+d[xAttr]+"<br>"+ "Val: "+convert(d[yAttr]));
+       })
+       .on("mouseout", function(d) {
+           d3.select(this).attr("opacity", "0");
+           div.style("display", "none");
+       })
+  
     // Chart title
     chart.append("text")
          .attr("x", (width / 2))             
@@ -517,6 +544,13 @@ function drawLineGraphInteractive(
     yLabel
     ) 
 {  
+  
+    var div = d3.select("body").append("div")
+                .attr("class", "toolTip")
+                .style("position", "absolute")
+            
+    var convert = d3.format(".2f")
+    
     height = 300; 
 
     minX = d3.min(dataset, function(d) {return d[xAttr]})
@@ -558,6 +592,27 @@ function drawLineGraphInteractive(
          .attr('stroke', color)
          .attr('stroke-width', 3)
          .attr('fill', 'none');
+
+    chart.selectAll(".dataPoint")
+       .data(dataset)
+       .enter().append("circle")
+       .attr("class", "dataPoint")
+       .attr("fill", "#fff")
+       .attr("cx", function(d, i) { return xScale(d[xAttr]) })
+       .attr("cy", function(d) { return yScale(d[yAttr]) })
+       .attr("r", 20)
+       .attr("opacity", "0")
+       .on("mouseover", function(d) {
+           d3.select(this).attr("opacity", "0");
+           div.style("left", (d3.event.pageX) - 30 +  "px")
+                  .style("top", (d3.event.pageY) + 20 +"px")
+                  .style("display", "inline-block")
+                  .html("<b>Year: "+d[xAttr]+"<br>"+ "Val: "+convert(d[yAttr]));
+       })
+       .on("mouseout", function(d) {
+           d3.select(this).attr("opacity", "0");
+           div.style("display", "none");
+       })
 
     // Chart title
     chart.append("text")
