@@ -8,7 +8,7 @@ var reference = {'H_AB':['H', 'AB'],
                  'SO_G':['SO','G']
                 }
 
-var time = [1871, 2017] 
+var time = [1871, 2017]
 
 // select specific column of data
 // value corresponds to value stored in button (see html)
@@ -40,7 +40,7 @@ width = 1000 - margin.left - margin.right,
 height = 400 - margin.top - margin.bottom;
 
 // button click activities
-function wireButtonClickEvents() 
+function wireButtonClickEvents()
 {
     d3.selectAll("#buttonClass .button").on("click", function () {
         dataSelection = d3.select(this).attr("data-val");
@@ -52,20 +52,20 @@ function wireButtonClickEvents()
             $("#interactive").empty();
             $("#variance").empty();
             drawLineGraphInteractive(
-                dataset, 
-                "Year", 
-                "H_AB", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "H_AB",
+                "#interactive",
                 "#005a7d",
                 "Yearly Average of Hits/AB (1871-2017)",
                 "Year",
                 "Yearly Average of Hits/AB"
                 );
             drawBarGraphInteractive(
-                dataset, 
-                "Year", 
-                "H_AB", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "H_AB",
+                "#interactive",
                 "#005a7d",
                 "Variance comparison for Hits/AB",
                 "Year",
@@ -80,20 +80,20 @@ function wireButtonClickEvents()
             $("#interactive").empty();
             $("#variance").empty();
             drawLineGraphInteractive(
-                dataset, 
-                "Year", 
-                "HR_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "HR_G",
+                "#interactive",
                 "#005a7d",
                 "Yearly Average of Homeruns/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Homeruns/Game"
                 );
             drawBarGraphInteractive(
-                dataset, 
-                "Year", 
-                "HR_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "HR_G",
+                "#interactive",
                 "#005a7d",
                 "Variance comparison for Homeruns/Game",
                 "Year",
@@ -108,20 +108,20 @@ function wireButtonClickEvents()
             $("#interactive").empty();
             $("#variance").empty();
             drawLineGraphInteractive(
-                dataset, 
-                "Year", 
-                "R_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "R_G",
+                "#interactive",
                 "#005a7d",
                 "Yearly Average of Runs/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Runs/Game"
                 );
             drawBarGraphInteractive(
-                dataset, 
-                "Year", 
-                "R_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "R_G",
+                "#interactive",
                 "#005a7d",
                 "Variance comparison for Runs/Game",
                 "Year",
@@ -136,20 +136,20 @@ function wireButtonClickEvents()
             $("#interactive").empty();
             $("#variance").empty();
             drawLineGraphInteractive(
-                dataset, 
-                "Year", 
-                "BB_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "BB_G",
+                "#interactive",
                 "#005a7d",
                 "Yearly Average of Walks/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Walks/Game"
                 );
             drawBarGraphInteractive(
-                dataset, 
-                "Year", 
-                "BB_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "BB_G",
+                "#interactive",
                 "#005a7d",
                 "Variance comparison for Walks/Game",
                 "Year",
@@ -164,20 +164,20 @@ function wireButtonClickEvents()
             $("#interactive").empty();
             $("#variance").empty();
             drawLineGraphInteractive(
-                dataset, 
-                "Year", 
-                "SO_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "SO_G",
+                "#interactive",
                 "#005a7d",
                 "Yearly Average of Strike-outs/Game (1871-2017)",
                 "Year",
                 "Yearly Average of Strike/Game"
             );
             drawBarGraphInteractive(
-                dataset, 
-                "Year", 
-                "SO_G", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "SO_G",
+                "#interactive",
                 "#005a7d",
                 "Variance comparison for Strike-outs/Game",
                 "Year",
@@ -192,20 +192,20 @@ function wireButtonClickEvents()
             $("#interactive").empty();
             $("#variance").empty();
             drawLineGraphInteractive(
-                dataset, 
-                "Year", 
-                "OBP", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "OBP",
+                "#interactive",
                 "#005a7d",
                 "Yearly Average On-Bat Percentage (1871-2017)",
                 "Year",
                 "Yearly Average OBP"
             );
             drawBarGraphInteractive(
-                dataset, 
-                "Year", 
-                "OBP", 
-                "#interactive", 
+                dataset,
+                "Year",
+                "OBP",
+                "#interactive",
                 "#005a7d",
                 "Variance comparison for On-Bat Percentage",
                 "Year",
@@ -216,7 +216,7 @@ function wireButtonClickEvents()
     });
 }
 
-function eventButtons() 
+function eventButtons()
 {
     d3.selectAll("#event_selector .button").on("click", function () {
         eventSelector = d3.select(this).attr("data-val");
@@ -271,14 +271,14 @@ function eventButtons()
             d3.select(this).classed("selected", true);
             time = [1963,1968]
 
-            variance_mod(time)    
+            variance_mod(time)
           }
 
           else {
             d3.selectAll('.bar')
               .attr('opacity', 0.4)
             d3.select(this).classed("selected", false);
-          }    
+          }
         }
 
         else if (eventSelector == Roids)
@@ -293,12 +293,12 @@ function eventButtons()
 
             variance_mod(time)
           }
-         
+
          else {
             d3.selectAll('.bar')
               .attr('opacity', 0.4)
             d3.select(this).classed("selected", false);
-          }    
+          }
 
         }
     });
@@ -306,15 +306,15 @@ function eventButtons()
 
 }
 
-$(document).ready(function () 
+$(document).ready(function ()
 {
     loadData();
     listener();
 });
 
-function loadData() 
+function loadData()
 {
-    d3.csv('data/Teams_wraw.csv', function(data) 
+    d3.csv('data/Teams_wraw.csv', function(data)
     {
         dataset =  data
         data.forEach(function(d) {
@@ -337,85 +337,85 @@ function loadData()
             d.SO_G = parseFloat(d.SO_G)
             d.OBP = parseFloat(d.OBP)
         })
-        
+
         length_data = dataset.length
 
         drawLineGraph(
-            data, 
-            "Year", 
-            "HR_G", 
-            "#HR_G", 
+            data,
+            "Year",
+            "HR_G",
+            "#HR_G",
             "#003f5c",
             "Yearly Average of Homeruns/Game (1871-2017)",
             "Year",
             "Yearly Average of Homeruns/Game"
             )
         drawLineGraph(
-            data, 
-            "Year", 
-            "H_AB", 
-            "#H_AB", 
+            data,
+            "Year",
+            "H_AB",
+            "#H_AB",
             "#003f5c",
             "Yearly Average of Hits/AB (1871-2017)",
             "Year",
             "Yearly Average of Hits/AB"
             )
         drawLineGraph(
-            data, 
-            "Year", 
-            "BB_G", 
-            "#W_G", 
+            data,
+            "Year",
+            "BB_G",
+            "#W_G",
             "#2f4b7c",
             "Yearly Average of Walks/Game (1871-2017)",
             "Year",
             "Yearly Average of Walks/Game"
             )
         drawLineGraph(
-            data, 
-            "Year", 
-            "SO_G", 
-            "#SO_G", 
+            data,
+            "Year",
+            "SO_G",
+            "#SO_G",
             "#2f4b7c",
             "Yearly Average of Strike-outs/Game (1871-2017)",
             "Year",
             "Yearly Average of Strike/Game"
             )
         drawLineGraph(
-            data, 
-            "Year", 
-            "HR_G", 
-            "#HR_G_STEROIDS", 
+            data,
+            "Year",
+            "HR_G",
+            "#HR_G_STEROIDS",
             "#665191",
             "Yearly Average of Homeruns/Game (1871-2017)",
             "Year",
             "Yearly Average of Homeruns/Game"
             )
-        
+
         drawLineGraph(
-            data, 
-            "Year", 
-            "R_G", 
-            "#R_G_STEROIDS", 
+            data,
+            "Year",
+            "R_G",
+            "#R_G_STEROIDS",
             "#665191",
             "Yearly Average of Runs/Game (1871-2017)",
             "Year",
             "Yearly Average of Runs/Game"
             )
         drawLineGraphInteractive(
-            data, 
-            "Year", 
-            "H_AB", 
-            "#interactive", 
+            data,
+            "Year",
+            "H_AB",
+            "#interactive",
             "#005a7d",
             "Yearly Average of Hits/AB (1871-2017)",
             "Year",
             "Yearly Average of Hits/AB"
             )
         drawBarGraphInteractive(
-            data, 
-            "Year", 
-            "H_AB", 
-            "#variance", 
+            data,
+            "Year",
+            "H_AB",
+            "#variance",
             "#005a7d",
             "Yearly Average of Hits/AB (1871-2017)",
             "Year",
@@ -428,33 +428,33 @@ function loadData()
 }
 
 function drawLineGraph(
-    dataset, 
-    xAttr, 
-    yAttr, 
-    chartID, 
+    dataset,
+    xAttr,
+    yAttr,
+    chartID,
     color,
     chartTitle,
     xLabel,
     yLabel
-    ) 
-{  
-  
+    )
+{
+
     var div = d3.select("body").append("div")
                 .attr("class", "toolTip")
                 .style("position", "absolute")
-            
+
     var convert = d3.format(".2f")
-    
+
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
 
     minY = d3.min(dataset, function(d) {return d[yAttr]})
     maxY = d3.max(dataset, function(d) {return d[yAttr]})
-    
+
     var xScale = d3.scaleLinear()
-                   .domain([minX, maxX]) 
+                   .domain([minX, maxX])
                    .range([0, width]);
-    
+
     var yScale = d3.scaleLinear()
                    .domain([minY, maxY])
                    .range([height, 0]);
@@ -465,19 +465,19 @@ function drawLineGraph(
                   .append("g")
                   .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-    
+
     var xAxis = chart.append("g")
                      .attr("transform", "translate(0, " + height + ")")
                      .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(12));
 
     var yAxis = chart.append("g")
                      .call(d3.axisLeft(yScale));
-    
+
     // add line
     var lineGen = d3.line(dataset)
                     .x(function(d) { return xScale(d[xAttr]); })
                     .y(function(d) { return yScale(d[yAttr]); });
-    
+
     chart.append('svg:path')
          .attr('d', lineGen(dataset))
          .attr('stroke', color)
@@ -504,20 +504,20 @@ function drawLineGraph(
            d3.select(this).attr("opacity", "0");
            div.style("display", "none");
        })
-  
+
     // Chart title
     chart.append("text")
-         .attr("x", (width / 2))             
+         .attr("x", (width / 2))
          .attr("y", 0 - (margin.top / 5))
-         .attr("text-anchor", "middle")  
+         .attr("text-anchor", "middle")
          .style("font-size", "25px")
-         .style("font-weight", "bold") 
+         .style("font-weight", "bold")
          .text(chartTitle);
 
     // x axis label
     chart.append("text")
          .attr("transform",
-            "translate(" + (width/2) + " ," + 
+            "translate(" + (width/2) + " ," +
                            (height + 40) + ")")
          .style("text-anchor", "middle")
          .text(xLabel);
@@ -529,41 +529,41 @@ function drawLineGraph(
          .attr("x",0 - (height / 2))
          .attr("dy", "1em")
          .style("text-anchor", "middle")
-         .text(yLabel);  
+         .text(yLabel);
 }
 
 // the last visualization
 function drawLineGraphInteractive(
-    dataset, 
-    xAttr, 
-    yAttr, 
-    chartID, 
+    dataset,
+    xAttr,
+    yAttr,
+    chartID,
     color,
     chartTitle,
     xLabel,
     yLabel
-    ) 
-{  
-  
+    )
+{
+
     var div = d3.select("body").append("div")
                 .attr("class", "toolTip")
                 .style("position", "absolute")
-            
+
     var convert = d3.format(".2f")
-    
-    height = 300; 
+
+    height = 300;
 
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
 
     minY = d3.min(dataset, function(d) {return d[yAttr]})
     maxY = d3.max(dataset, function(d) {return d[yAttr]})
-    
-    
+
+
     var xScale = d3.scaleLinear()
-                   .domain([minX, maxX]) 
+                   .domain([minX, maxX])
                    .range([0, width]);
-    
+
     var yScale = d3.scaleLinear()
                    .domain([minY, maxY])
                    .range([height, 0]);
@@ -574,19 +574,19 @@ function drawLineGraphInteractive(
                   .append("g")
                   .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-    
+
     var xAxis = chart.append("g")
                      .attr("transform", "translate(0, " + height + ")")
                      .call(d3.axisBottom(xScale).tickFormat(d3.format("d")).ticks(12));
 
     var yAxis = chart.append("g")
                      .call(d3.axisLeft(yScale));
-    
+
     // add line
     var lineGen = d3.line(dataset)
                     .x(function(d) { return xScale(d[xAttr]); })
                     .y(function(d) { return yScale(d[yAttr]); });
-    
+
     chart.append('svg:path')
          .attr('d', lineGen(dataset))
          .attr('stroke', color)
@@ -616,17 +616,17 @@ function drawLineGraphInteractive(
 
     // Chart title
     chart.append("text")
-         .attr("x", (width / 2))             
+         .attr("x", (width / 2))
          .attr("y", 0 - (margin.top / 5))
-         .attr("text-anchor", "middle")  
+         .attr("text-anchor", "middle")
          .style("font-size", "25px")
-         .style("font-weight", "bold") 
+         .style("font-weight", "bold")
          .text(chartTitle);
 
     // x axis label
     chart.append("text")
          .attr("transform",
-            "translate(" + (width/2) + " ," + 
+            "translate(" + (width/2) + " ," +
                            (height + 40) + ")")
          .style("text-anchor", "middle")
          .text(xLabel);
@@ -638,7 +638,7 @@ function drawLineGraphInteractive(
          .attr("x",0 - (height / 2))
          .attr("dy", "1em")
          .style("text-anchor", "middle")
-         .text(yLabel);   
+         .text(yLabel);
 }
 
 // Time is an array/list
@@ -660,7 +660,8 @@ function OBP_calc(time){
   var total_H = 0
   var total_AB = 0
   var total_HBP = 0;
-  var total_SF = 0
+  var total_SF = 0;
+  var total_BB = 0;
 
   for (var i = 0; i < length_data; i++) {
     if (dataset[i]['Year'] >= time[0] && dataset[i]['Year'] <= time[1]){
@@ -668,41 +669,42 @@ function OBP_calc(time){
       total_AB += dataset[i]['AB']
       total_HBP += dataset[i]['HBP']
       total_SF += dataset[i]['SF']
+      total_BB += dataset[i]['BB']
     }
   }
-  return (total_H + total_HBP + total_SF)/(total_AB + total_H + total_HBP + total_SF)
+  return (total_H + total_HBP + total_BB)/(total_AB + total_HBP + total_SF + total_BB)
 }
 
 function drawBarGraphInteractive(
-    dataset, 
-    xAttr, 
-    yAttr, 
-    chartID, 
+    dataset,
+    xAttr,
+    yAttr,
+    chartID,
     color,
     chartTitle,
     xLabel,
     yLabel,
     time
-    ) 
-{  
+    )
+{
     if (yAttr == 'OBP'){average = OBP_calc(time)}
       else {average = average_calc(reference[yAttr][0], reference[yAttr][1], time)}
 
-    height = 300; 
+    height = 300;
 
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
 
     minY = d3.min(dataset, function(d) {return d[yAttr]})
     maxY = d3.max(dataset, function(d) {return d[yAttr]})
-    
-    
+
+
     var xScale = d3.scaleBand()
-                   .domain(_.range(minX, maxX+1)) 
+                   .domain(_.range(minX, maxX+1))
                    .range([0, width]);
-    
+
     var xRef = d3.scaleLinear()
-               .domain([minX, maxX]) 
+               .domain([minX, maxX])
                .range([0, width]);
 
     var yScale = d3.scaleLinear()
@@ -715,7 +717,7 @@ function drawBarGraphInteractive(
                   .append("g")
                   .attr("transform",
                     "translate(" + margin.left + "," + margin.top + ")");
-    
+
     var xAxis = chart.append("g")
                      .attr('id', 'AXIS')
                      .attr("transform", "translate(0, " + yScale(average) + ")")
@@ -724,7 +726,7 @@ function drawBarGraphInteractive(
                      //  .attr("transform", "rotate(-90)")
                      //  .attr("dy", "0.3em")
                      //  .attr("y", 0)
-                     //  .attr("dx", "-2em") 
+                     //  .attr("dx", "-2em")
                      //  .attr("font-size", "0.8em");
     var refAxis = chart.append("g")
                  .attr('id', 'refAxis')
@@ -744,19 +746,19 @@ function drawBarGraphInteractive(
     //         .data(dataset)
     //         .enter()
     //         .append("rect")
-    //         .attr("class", "bar") 
+    //         .attr("class", "bar")
     //         .attr("id", function (d) { return "bar" + d.Year; })//NEW
     //         .attr("x", function (d) { return xScale(d[xAttr]); })
     //         .attr("width", xScale.bandwidth()-2)
     //         .attr("y", function (d) { return yScale(d[yAttr]); })
     //         .attr("height", function (d) { return height - yScale(d[yAttr]); })
-    
+
     //Draw bars
     chart.selectAll(".bar")
             .data(dataset)
             .enter()
             .append("rect")
-            .attr("class", "bar") 
+            .attr("class", "bar")
             .attr("id", function (d) { return "bar" + d.Year; })//NEW
             .attr("x", function (d) { return xScale(d[xAttr]); })
             .attr("width", xScale.bandwidth()-2)
@@ -773,21 +775,21 @@ function drawBarGraphInteractive(
               if (d[yAttr] - average <= 0){return 'blue';}
               else {return 'red'}
               })
-    
+
 
     // Chart title
     chart.append("text")
-         .attr("x", (width / 2))             
+         .attr("x", (width / 2))
          .attr("y", 0 - (margin.top / 5))
-         .attr("text-anchor", "middle")  
+         .attr("text-anchor", "middle")
          .style("font-size", "25px")
-         .style("font-weight", "bold") 
+         .style("font-weight", "bold")
          .text(chartTitle);
 
     // x axis label
     chart.append("text")
          .attr("transform",
-            "translate(" + (width/2) + " ," + 
+            "translate(" + (width/2) + " ," +
                            (height + 40) + ")")
          .style("text-anchor", "middle")
          .text(xLabel);
@@ -799,7 +801,7 @@ function drawBarGraphInteractive(
          .attr("x",0 - (height / 2))
          .attr("dy", "1em")
          .style("text-anchor", "middle")
-         .text(yLabel);   
+         .text(yLabel);
 }
 
 function variance_mod(time){
@@ -810,12 +812,12 @@ function variance_mod(time){
                          4: 'SO_G',
                          5: 'OBP'
                         };
-    
+
     attribute = constant_to_y[dataSelection]
 
     if (attribute == 'OBP'){average = OBP_calc(time)}
       else {average = average_calc(reference[attribute][0], reference[attribute][1], time)}
-    
+
     console.log(average)
 
     minY = d3.min(dataset, function(d) {return d[attribute]})
@@ -846,7 +848,7 @@ function variance_mod(time){
 
     d3.selectAll('.bar')
       .attr('opacity', 0.4)
-    
+
     _.range(time[0], time[1]+1).forEach(function (d){
       d3.select('#bar'+d)
         .attr('opacity', 1)
