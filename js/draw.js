@@ -127,7 +127,6 @@ function loadData()
             d.Year = parseInt(d.Year)
             d.BB_G = parseFloat(d.BB_G)
             d.H_AB = parseFloat(d.H_AB)
-            d.MOVING_AVG_CRITERIA = parseFloat(d.MOVING_AVG_CRITERIA)
             d.R_G = parseFloat(d.R_G)
             d.SO_G = parseFloat(d.SO_G)
         })
@@ -216,8 +215,15 @@ function drawLineGraph(
     chartTitle,
     xLabel,
     yLabel
-    )
-{
+
+    ) 
+{  
+  // tooltip div
+    var div = d3.select("body").append("div")
+            .attr("class", "toolTip")
+            .style("position", "absolute")
+
+
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
 
@@ -251,13 +257,37 @@ function drawLineGraph(
     // add line
     var lineGen = d3.line(dataset)
                     .x(function(d) { return xScale(d[xAttr]); })
-                    .y(function(d) { return yScale(d[yAttr]); });
 
+                    .y(function(d) { return yScale(d[yAttr]); })
+
+    var convert = d3.format(".2f")
+    
     chart.append('svg:path')
          .attr('d', lineGen(dataset))
          .attr('stroke', color)
          .attr('stroke-width', 3)
          .attr('fill', 'none');
+    
+    chart.selectAll(".dataPoint")
+         .data(dataset)
+         .enter().append("circle")
+         .attr("class", "dataPoint")
+         .attr("fill", "#fff")
+         .attr("cx", function(d, i) { return xScale(d[xAttr]) })
+         .attr("cy", function(d) { return yScale(d[yAttr]) })
+         .attr("r", 20)
+         .attr("opacity", "0")
+         .on("mouseover", function(d) {
+             d3.select(this).attr("opacity", "0");
+             div.style("left", (d3.event.pageX) - 30 +  "px")
+                    .style("top", (d3.event.pageY) + 20 +"px")
+                    .style("display", "inline-block")
+                    .html("<b>Year: "+d[xAttr]+"<br>"+ "Val: "+convert(d[yAttr]));
+         })
+         .on("mouseout", function(d) {
+             d3.select(this).attr("opacity", "0");
+             div.style("display", "none");
+         })
 
     // Chart title
     chart.append("text")
@@ -296,10 +326,17 @@ function drawLineGraphInteractive(
     chartTitle,
     xLabel,
     yLabel
-    )
-{
-    height = 500;
 
+    ) 
+{  
+    var div = d3.select("body").append("div")
+            .attr("class", "toolTip")
+            .style("position", "absolute")
+            
+    var convert = d3.format(".2f")
+
+    height = 500; 
+  
     minX = d3.min(dataset, function(d) {return d[xAttr]})
     maxX = d3.max(dataset, function(d) {return d[xAttr]})
 
@@ -341,6 +378,27 @@ function drawLineGraphInteractive(
          .attr('stroke', color)
          .attr('stroke-width', 3)
          .attr('fill', 'none');
+
+    chart.selectAll(".dataPoint")
+         .data(dataset)
+         .enter().append("circle")
+         .attr("class", "dataPoint")
+         .attr("fill", "#fff")
+         .attr("cx", function(d, i) { return xScale(d[xAttr]) })
+         .attr("cy", function(d) { return yScale(d[yAttr]) })
+         .attr("r", 20)
+         .attr("opacity", "0")
+         .on("mouseover", function(d) {
+             d3.select(this).attr("opacity", "0");
+             div.style("left", (d3.event.pageX) - 30 +  "px")
+                    .style("top", (d3.event.pageY) + 20 +"px")
+                    .style("display", "inline-block")
+                    .html("<b>Year: "+d[xAttr]+"<br>"+ "Val: "+convert(d[yAttr]));
+         })
+         .on("mouseout", function(d) {
+             d3.select(this).attr("opacity", "0");
+             div.style("display", "none");
+         })
 
     // Chart title
     chart.append("text")

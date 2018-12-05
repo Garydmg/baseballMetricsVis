@@ -132,3 +132,19 @@ li {
     margin-left: 20px;
     margin-bottom: 20px;
 }
+
+
+.toolTip {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    font-size: 15px;
+    position: absolute;   
+    text-align: center;   
+    width: 120px;  
+    height: 50px;     
+    padding: 2px;  
+    color: white;
+    background: black;   
+    border: 0px;                  
+    border-radius: 8px;
+}
+
