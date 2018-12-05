@@ -646,6 +646,10 @@ function drawBarGraphInteractive(
                    .domain(_.range(minX, maxX+1)) 
                    .range([0, width]);
     
+    var xRef = d3.scaleLinear()
+               .domain([minX, maxX]) 
+               .range([0, width]);
+
     var yScale = d3.scaleLinear()
                    .domain([minY, maxY])
                    .range([height, 0]);
@@ -667,6 +671,13 @@ function drawBarGraphInteractive(
                      //  .attr("y", 0)
                      //  .attr("dx", "-2em") 
                      //  .attr("font-size", "0.8em");
+    var refAxis = chart.append("g")
+                 .attr('id', 'refAxis')
+                 .attr("transform", "translate(0, " + height + ")")
+                 .call(d3.axisBottom(xRef).tickFormat(d3.format("d")).ticks(12));
+
+
+
     d3.selectAll('#AXIS .tick').remove()
 
     var yAxis = chart.append("g")
